@@ -49,7 +49,7 @@
     "bundlesize": "^0.17.1",
     "docz": "^0.13.7",
     "docz-theme-default": "^0.13.7",
-    "enzyme": "^3.9.0",
+    "enzyme": "1.11.2",
     "enzyme-adapter-react-16": "^1.11.2",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.16.0",
