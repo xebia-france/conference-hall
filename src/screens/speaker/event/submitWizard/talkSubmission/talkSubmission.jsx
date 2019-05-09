@@ -23,7 +23,7 @@ const TalkSubmission = ({
   isUnsubmitting,
 }) => (
   <Form onSubmit={onSubmit} initialValues={initialValues}>
-    {({ handleSubmit }) => (
+    {({ handleSubmit, invalid }) => (
       <form className="talk-submission">
         <Titlebar icon="fa fa-microphone" title={talk.title}>
           {update && (
@@ -36,13 +36,13 @@ const TalkSubmission = ({
               Remove submission
             </SubmitButton>
           )}
-          <SubmitButton onClick={handleSubmit} submitting={isSubmitting}>
+          <SubmitButton onClick={handleSubmit} submitting={isSubmitting} invalid={invalid}>
             {update ? 'Update submission' : `Submit to ${event.name}`}
           </SubmitButton>
         </Titlebar>
         <div className="submit-talk-form card">
           {!isEmpty(event.categories) && (
-            <RadioGroup name="categories" label="Talk categories" inline validate={required}>
+            <RadioGroup name="categories" label="Talk categories" inline>
               {event.categories.map(c => (
                 <Field
                   key={c.id}
@@ -51,12 +51,13 @@ const TalkSubmission = ({
                   label={c.name}
                   type="radio"
                   component={radio}
+                  validate={required}
                 />
               ))}
             </RadioGroup>
           )}
           {!isEmpty(event.formats) && (
-            <RadioGroup name="formats" label="Talk formats" inline validate={required}>
+            <RadioGroup name="formats" label="Talk formats" inline>
               {event.formats.map(f => (
                 <Field
                   key={f.id}
@@ -65,6 +66,7 @@ const TalkSubmission = ({
                   label={f.name}
                   type="radio"
                   component={radio}
+                  validate={required}
                 />
               ))}
             </RadioGroup>
