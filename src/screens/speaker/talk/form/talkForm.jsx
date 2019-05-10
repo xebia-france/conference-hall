@@ -11,12 +11,12 @@ import './talkForm.css'
 
 const TalkForm = ({ onSubmit, initialValues, submitting }) => (
   <Form onSubmit={onSubmit} initialValues={initialValues}>
-    {({ handleSubmit, pristine, invalid }) => (
+    {({ handleSubmit, pristine, invalid, errors }) => (
       <form className="talk-form card">
         <Field name="title" label="Title" type="text" component={input} validate={required} />
         <Field name="abstract" label="Abstract" component={markdownInput} validate={required} />
         <Field name="language" label="Talk language" type="text" component={input} />
-        <RadioGroup name="level" label="Level" inline>
+        <RadioGroup name="level" label="Level" inline error={errors.level}>
           <Field name="level" value="beginner" label="Beginner" type="radio" component={radio} validate={required} />
           <Field name="level" value="intermediate" label="Intermediate" type="radio" component={radio} validate={required} />
           <Field name="level" value="advanced" label="Advanced" type="radio" component={radio} validate={required} />
