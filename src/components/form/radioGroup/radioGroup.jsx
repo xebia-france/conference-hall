@@ -6,14 +6,14 @@ import Label from '../label'
 import './radioGroup.css'
 
 const RadioGroup = ({
-  name, label, children, inline, noError, className,
+  name, label, children, inline, noError, className, error
 }) => {
   const classes = cn('form-radio-group', className, {
     'form-radio-group-inline': inline,
     'form-radio-group-col': !inline,
   })
   return (
-    <Label name={name} label={label} noError={noError}>
+    <Label name={name} label={label} noError={noError} error={error || ''}>
       <div className={classes}>{children}</div>
     </Label>
   )

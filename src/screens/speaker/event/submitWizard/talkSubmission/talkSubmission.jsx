@@ -4,6 +4,7 @@ import { Form } from 'react-final-form'
 
 import Field from 'components/form/field'
 import Titlebar from 'components/titlebar'
+import { required } from 'components/form/validators'
 import {
   markdownInput, radio, SubmitButton, RadioGroup,
 } from 'components/form'
@@ -22,7 +23,7 @@ const TalkSubmission = ({
   isUnsubmitting,
 }) => (
   <Form onSubmit={onSubmit} initialValues={initialValues}>
-    {({ handleSubmit }) => (
+    {({ handleSubmit, invalid, errors }) => (
       <form className="talk-submission">
         <Titlebar icon="fa fa-microphone" title={talk.title}>
           {update && (
@@ -35,13 +36,13 @@ const TalkSubmission = ({
               Remove submission
             </SubmitButton>
           )}
-          <SubmitButton onClick={handleSubmit} submitting={isSubmitting}>
+          <SubmitButton onClick={handleSubmit} submitting={isSubmitting} invalid={invalid}>
             {update ? 'Update submission' : `Submit to ${event.name}`}
           </SubmitButton>
         </Titlebar>
         <div className="submit-talk-form card">
           {!isEmpty(event.categories) && (
-            <RadioGroup name="categories" label="Talk categories" inline>
+            <RadioGroup name="categories" label="Talk categories" inline error={errors.categories}>
               {event.categories.map(c => (
                 <Field
                   key={c.id}
@@ -50,12 +51,13 @@ const TalkSubmission = ({
                   label={c.name}
                   type="radio"
                   component={radio}
+                  validate={required}
                 />
               ))}
             </RadioGroup>
           )}
           {!isEmpty(event.formats) && (
-            <RadioGroup name="formats" label="Talk formats" inline>
+            <RadioGroup name="formats" label="Talk formats" inline error={errors.formats}>
               {event.formats.map(f => (
                 <Field
                   key={f.id}
@@ -64,6 +66,7 @@ const TalkSubmission = ({
                   label={f.name}
                   type="radio"
                   component={radio}
+                  validate={required}
                 />
               ))}
             </RadioGroup>
