@@ -21,6 +21,27 @@ export default {
     },
   },
 
+  '/vote': {
+    code: 'vote',
+    root: 'vote',
+    title: 'Votez pour les sujets',
+
+    '/event': {
+      code: 'vote-event',
+      '/:eventId': {
+        code: 'vote-event-page',
+        isEventPage: true,
+        '/proposals' : {
+          code: 'vote-event-proposals',
+          sortOrders: ['newest', 'oldest', 'highestRating', 'lowestRating'],
+          ratings: ['rated', 'notRated'],
+          statuses: ['submitted', 'accepted', 'rejected', 'confirmed', 'declined'],
+        },
+        '/proposal/:proposalId': { code: 'vote-event-proposal-page' }
+      }
+    }
+  },
+
   '/organizer': {
     code: 'organizer',
     root: 'organizer',

@@ -8,6 +8,7 @@ import NotFound from './screens/components/notFound'
 import Conference from './screens/conference'
 import Organizer from './screens/organizer'
 import Speaker from './screens/speaker'
+import Vote from './screens/vote'
 
 import store from './store'
 
@@ -18,6 +19,7 @@ const App = ({ className }) => (
     <Conference />
     <Organizer />
     <Speaker />
+    <Vote />
     <NotFound />
   </div>
 )
