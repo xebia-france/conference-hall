@@ -14,6 +14,7 @@ const addProposal = (eventId, proposal) => {
     .set({
       ...newProposal,
       rating: null,
+      likes: null,
       state: 'submitted',
       updateTimestamp: now,
       createTimestamp: now,

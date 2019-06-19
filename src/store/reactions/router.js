@@ -33,7 +33,6 @@ export const replaceWithNextUrl = (action, store, { router }) => {
   if (!isEmpty(router.getQueryParams())) {
     nextParams.query = JSON.stringify(router.getQueryParams())
   }
-
   return router.replace(route, null, nextParams)
 }
 
@@ -43,8 +42,8 @@ export const redirectToNextUrl = (action, store, { router }) => {
 
   const redirect = router.getParam('redirect')
   if (redirect) {
-    const params = router.getParam('params') ? JSON.parse(router.getParam('params')) : undefined
-    const query = router.getParam('query') ? JSON.parse(router.getParam('query')) : undefined
+    const params = router.getParam('params') ? JSON.parse(decodeURIComponent(router.getParam('params'))) : undefined
+    const query = router.getParam('query') ? JSON.parse(decodeURIComponent(router.getParam('query'))) : undefined
     router.replace(redirect, params, query)
   }
 }

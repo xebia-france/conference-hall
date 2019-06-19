@@ -22,7 +22,7 @@ const SidebarWrapper = withTheme(({ className, onClick, content }) => (
 ))
 
 const Brand = ({
-  title, baseRoute, isTablet, isMobile, sidebar, className,
+  title, baseRoute, isTablet, isMobile, sidebar, className, backLinkArgs
 }) => (
   <div className={cn(styles.brand, className)}>
     {sidebar && (isMobile || isTablet) && (
@@ -36,7 +36,7 @@ const Brand = ({
         {({ hide }) => <SidebarWrapper content={sidebar} onClick={hide} />}
       </OpenTrigger>
     )}
-    <Link code={baseRoute}>{title}</Link>
+    <Link {...(backLinkArgs ? backLinkArgs : {code:baseRoute})}>{title}</Link>
     {sidebar && (isMobile || isTablet) && <AvatarDropdown classname={styles.avatar} />}
   </div>
 )

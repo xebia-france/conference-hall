@@ -10,7 +10,7 @@ import Proposals from './proposals'
 import Proposal from './proposal'
 
 const Vote = () => (
-  <AppLayout>
+  <AppLayout backLinkArgs={{code: 'vote-event-proposals', eventId: 'eOlXza98MufDjio43ulH'}}>
     <Profile />
     <Proposals />
     <Proposal />

@@ -10,6 +10,7 @@ const mapStore = (store) => {
     .getAsArray()
 
   return {
+    userId: store.auth.get().uid,
     loaded: store.data.proposals.isInitialized(),
     proposals,
     load: () => store.dispatch('@@ui/ON_LOAD_EVENT_PROPOSALS'),

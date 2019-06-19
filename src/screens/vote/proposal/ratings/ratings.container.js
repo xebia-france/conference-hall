@@ -3,12 +3,14 @@ import { inject } from '@k-ramel/react'
 
 import Ratings from './ratings'
 
-const mapStore = (store) => {
+const mapStore = (store, props, {router}) => {
   const { uid } = store.auth.get()
   const proposals = store.data.proposals.getKeys()
   const { proposalIndex } = store.ui.organizer.proposal.get()
-  console.log(proposals);
+  const proposalId = router.getParam('proposalId');
+  const proposal = store.data.proposals.get(proposalId);
   return {
+    isLiked: proposal.likes && Object.keys(proposal.likes).includes(uid),
     isLoaded: store.data.ratings.isInitialized(),
     ...store.data.ratings.get(uid),
     hasNext: proposalIndex + 1 < proposals.length,

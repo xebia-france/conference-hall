@@ -30,12 +30,8 @@ export default {
       code: 'vote-event',
       '/:eventId': {
         code: 'vote-event-page',
-        isEventPage: true,
         '/proposals' : {
-          code: 'vote-event-proposals',
-          sortOrders: ['newest', 'oldest', 'highestRating', 'lowestRating'],
-          ratings: ['rated', 'notRated'],
-          statuses: ['submitted', 'accepted', 'rejected', 'confirmed', 'declined'],
+          code: 'vote-event-proposals'
         },
         '/proposal/:proposalId': { code: 'vote-event-proposal-page' }
       }

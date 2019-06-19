@@ -24,7 +24,7 @@ const Ratings = ({
     </Button>
     <div className="btn-ratings">
       {!isLoaded && <LoadingIndicator />}
-      {isLoaded && <Like onLiking={onLiking} isLiked={isLiked} />}
+      {isLoaded && <Like onLiking={() => onLiking(!isLiked)} isLiked={isLiked} />}
     </div>
     <Button tertiary className="btn-next" disabled={!hasNext} onClick={onNext}>
       <IconLabel icon="fa fa-angle-right" label="Next" right />
@@ -34,7 +34,7 @@ const Ratings = ({
 
 Ratings.propTypes = {
   isLoaded: PropTypes.bool,
-  isLiked: PropTypes.number,
+  isLiked: PropTypes.bool,
   onLiking: PropTypes.func.isRequired,
   hasNext: PropTypes.bool,
   hasPrevious: PropTypes.bool,
@@ -45,7 +45,7 @@ Ratings.propTypes = {
 
 Ratings.defaultProps = {
   isLoaded: false,
-  isLiked: undefined,
+  isLiked: false,
   hasNext: false,
   hasPrevious: false,
   className: undefined,
