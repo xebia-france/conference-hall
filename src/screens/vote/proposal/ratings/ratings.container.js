@@ -10,7 +10,7 @@ const mapStore = (store, props, {router}) => {
   const proposalId = router.getParam('proposalId');
   const proposal = store.data.proposals.get(proposalId);
   return {
-    isLiked: proposal.likes && Object.keys(proposal.likes).includes(uid),
+    isLiked: proposal.likes && (proposal.likes || []).includes(uid),
     isLoaded: store.data.ratings.isInitialized(),
     ...store.data.ratings.get(uid),
     hasNext: proposalIndex + 1 < proposals.length,

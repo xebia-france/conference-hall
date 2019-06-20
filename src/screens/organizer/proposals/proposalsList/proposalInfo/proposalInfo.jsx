@@ -24,6 +24,7 @@ const ProposalInfo = ({ proposal, isMobile, deliberationActive }) => {
         hates={hates}
         noopinion={noopinion}
         nbvotes={nbVotes}
+        nbLikes={(proposal.likes || []).length}
       />
     </div>
   )

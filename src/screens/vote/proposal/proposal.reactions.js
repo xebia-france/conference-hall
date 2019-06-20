@@ -1,4 +1,4 @@
-import omit from 'lodash/omit'
+import without from 'lodash/without'
 import * as firebase from 'firebase/proposals'
 
 export const nextProposal = async (action, store, { router }) => {
@@ -29,7 +29,6 @@ export const likeProposal = async (action, store, { router }) => {
   const { isLiked } = action.payload
   console.log('LIKE ?', isLiked);
   const { uid } = store.auth.get()
-  const user = store.data.users.get(uid)
   const eventId = router.getParam('eventId')
   const proposalId = router.getParam('proposalId')
   const proposal = store.data.proposals.get(proposalId);
@@ -37,9 +36,9 @@ export const likeProposal = async (action, store, { router }) => {
 
   // add or remove the rating in database and store
   if (isLiked) {
-    newLikes = {...(proposal.likes || {}), [uid]: {displayName: user.displayName, photoURL: user.photoURL}};
+    newLikes = [...(proposal.likes || []), uid];
   } else {
-    newLikes = omit(proposal.likes, uid);
+    newLikes = without(proposal.likes, uid);
   }
 
   await firebase.updateProposal(eventId, {...proposal, likes: newLikes});

@@ -16,7 +16,8 @@ const Proposals = ({
     className="event-proposals"
     array={shuffle(proposals)}
     renderRow={proposal => {
-      const isLiked = Object.keys(proposal.likes || {}).includes(userId)
+      console.log(proposal);
+      const isLiked = (proposal.likes || []).includes(userId)
       return (
         <ListItem
           key={proposal.id}

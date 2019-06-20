@@ -1,6 +1,6 @@
 /* eslint-disable comma-dangle */
 const firebase = require('firebase-admin')
-const { omit, toLower, deburr } = require('lodash')
+const { omit, toLower, deburr, sortBy } = require('lodash')
 
 const addProposal = (eventId, proposal) => {
   const newProposal = omit(proposal, 'submissions')
@@ -14,7 +14,7 @@ const addProposal = (eventId, proposal) => {
     .set({
       ...newProposal,
       rating: null,
-      likes: null,
+      likes: [],
       state: 'submitted',
       updateTimestamp: now,
       createTimestamp: now,
@@ -91,6 +91,12 @@ const getEventProposals = async (
     proposals = proposals.filter(proposal => proposal.usersRatings && !!proposal.usersRatings[uid])
   } else if (ratings === 'notRated') {
     proposals = proposals.filter(proposal => !proposal.usersRatings || !proposal.usersRatings[uid])
+  }
+
+  if (sortOrder === 'mostLikes') {
+    proposals = sortBy(proposals, [proposal => (proposal.likes || []).length]).reverse()
+  } else if (sortOrder === 'leastLikes') {
+    proposals = sortBy(proposals, [proposal => (proposal.likes || {}).length])
   }
 
   return proposals

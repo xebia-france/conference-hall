@@ -5,6 +5,7 @@ import Talk from './talk'
 import Speakers from './speakers'
 import Ratings from './ratings'
 import Actions from './actions'
+import Likers from './likers'
 
 import './proposal.css'
 
@@ -13,6 +14,7 @@ const Proposal = ({ eventId, proposal }) => (
     <Actions className="proposal-actions" eventId={eventId} proposalId={proposal.id} title={proposal.title} />
     <Ratings className="proposal-ratings" eventId={eventId} proposal={proposal} />
     <Speakers className="proposal-speakers" eventId={eventId} proposal={proposal} />
+    <Likers className="proposal-likers" eventId={eventId} proposal={proposal} />
     <Talk className="proposal-talk" eventId={eventId} proposal={proposal} />
   </div>
 )

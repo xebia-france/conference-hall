@@ -59,7 +59,7 @@ export default {
         },
         '/proposals': {
           code: 'organizer-event-proposals',
-          sortOrders: ['newest', 'oldest', 'highestRating', 'lowestRating'],
+          sortOrders: ['newest', 'oldest', 'highestRating', 'lowestRating', 'mostLiked', 'leastLiked'],
           ratings: ['rated', 'notRated'],
           statuses: ['submitted', 'accepted', 'rejected', 'confirmed', 'declined'],
           '/cards': {
