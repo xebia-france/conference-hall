@@ -14,7 +14,6 @@ const mapStore = (store, props, { router }) => {
     loaded: !!event,
     nbProposals,
     eventId,
-    load: () => store.dispatch('@@ui/ON_LOAD_EVENT'),
   }
 }
 

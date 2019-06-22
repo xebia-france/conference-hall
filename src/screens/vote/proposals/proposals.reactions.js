@@ -1,4 +1,5 @@
 import * as firebase from 'firebase/proposals'
+import { shuffle } from 'helpers/array'
 
 
 /* load proposals */
@@ -9,7 +10,7 @@ export const loadProposals = async (action, store, { router }) => {
   const { uid } = store.auth.get()
 
   const proposals = await firebase.fetchEventProposals(eventId, uid)
-  store.data.proposals.set(proposals)
+  store.data.proposals.set(shuffle(proposals))
 }
 
 /* select a proposal */

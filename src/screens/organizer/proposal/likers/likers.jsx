@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import cn from 'classnames'
-import keys from 'lodash/keys'
 
 import Liker from './liker'
 

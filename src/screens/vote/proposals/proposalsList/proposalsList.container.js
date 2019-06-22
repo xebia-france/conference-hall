@@ -1,6 +1,7 @@
 import { compose } from 'redux'
 import { inject } from '@k-ramel/react'
 import { forRoute } from '@k-redux-router/react-k-ramel'
+import isEmpty from 'lodash/isEmpty'
 
 import loader from 'components/loader'
 import ProposalsList from './proposalsList'
@@ -13,7 +14,7 @@ const mapStore = (store) => {
     userId: store.auth.get().uid,
     loaded: store.data.proposals.isInitialized(),
     proposals,
-    load: () => store.dispatch('@@ui/ON_LOAD_EVENT_PROPOSALS'),
+    load: () => {if(isEmpty(store.data.proposals.get())) store.dispatch('@@ui/ON_LOAD_EVENT_PROPOSALS')},
     onSelect: (eventId, proposalId) => {
       store.dispatch({ type: '@@ui/ON_SELECT_PROPOSAL', payload: { eventId, proposalId } })
     },

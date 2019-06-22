@@ -5,7 +5,6 @@ import { withSizes } from 'styles/utils'
 import IconLabel from 'components/iconLabel'
 import { List, ListItem } from 'components/list'
 import ProposalSubtitle from './proposalSubtitle'
-import { shuffle } from 'helpers/array'
 import './proposalsList.css'
 
 
@@ -14,9 +13,8 @@ const Proposals = ({
 }) => (
   <List
     className="event-proposals"
-    array={shuffle(proposals)}
+    array={proposals}
     renderRow={proposal => {
-      console.log(proposal);
       const isLiked = (proposal.likes || []).includes(userId)
       return (
         <ListItem
