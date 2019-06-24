@@ -1,4 +1,6 @@
 import * as firebase from 'firebase/proposals'
+import { fetchOrganizationEvents } from 'firebase/organizations'
+import eventCrud from 'firebase/events'
 import { shuffle } from 'helpers/array'
 
 
@@ -27,5 +29,18 @@ export const selectProposal = async (action, store, { router }) => {
       { eventId, proposalId },
       { ...filters },
     )
+  }
+}
+
+export const fetchEvent = async (action, store, { router }) => {
+  const eventId = action.payload || router.getParam('eventId')
+  if (!eventId) return
+  // check if already in the store
+  const current = store.data.events.get(eventId)
+  if (current && current.id === eventId) return
+  // fetch event from id
+  const ref = await eventCrud.read(eventId)
+  if (ref.exists) {
+    store.data.events.add({ id: eventId, ...ref.data() })
   }
 }

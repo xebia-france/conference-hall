@@ -12,9 +12,7 @@ const ProposalInfo = ({ proposal, isMobile, deliberationActive }) => {
   const {
     id, rating, loves, hates, noopinion, usersRatings,
   } = proposal
-
   const nbVotes = compact(values(usersRatings)).length
-
   return (
     <div className="proposal-item-info">
       {(!isMobile && deliberationActive) && <TalkSelection proposalId={id} />}
