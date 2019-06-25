@@ -31,7 +31,7 @@ export const likeProposal = async (action, store, { router }) => {
   const { uid } = store.auth.get()
   const eventId = router.getParam('eventId')
   const proposalId = router.getParam('proposalId')
-  const proposal = store.data.proposals.get(proposalId);
+  const proposal = (await firebase.fetchProposal(eventId, proposalId)).data()
   let newLikes;
 
   // add or remove the rating in database and store

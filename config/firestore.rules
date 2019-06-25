@@ -64,7 +64,7 @@ service cloud.firestore {
       // PROPOSALS
       match /proposals/{proposal} {
       	allow read: if authenticated() && fromMyEventWithVoteEnabled(get(/databases/$(database)/documents/events/$(event)));
-        allow write: if authenticated() && (itsMyProposal() || fromMyEvent(get(/databases/$(database)/documents/events/$(event))));
+        allow write: if authenticated() && fromMyEventWithVoteEnabled(get(/databases/$(database)/documents/events/$(event)));
 
         // RATINGS
         match /ratings/{rating} {
