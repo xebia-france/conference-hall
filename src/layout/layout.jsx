@@ -7,9 +7,9 @@ import Navbar from './navbar'
 
 import './layout.css'
 
-const AppLayout = ({ children, sidebar }) => (
+const AppLayout = ({ children, sidebar, backLinkArgs }) => (
   <div className={cn('layout-screen', { 'layout-screen-full-width': !sidebar })}>
-    <Brand className="layout-brand" sidebar={sidebar} />
+    <Brand className="layout-brand" sidebar={sidebar} backLinkArgs={backLinkArgs} />
     <Navbar className="layout-navbar" />
     {sidebar && <div className="layout-sidebar">{sidebar}</div>}
     <div className={cn('layout-main', { 'layout-main-full-width': !sidebar })}>
@@ -21,6 +21,7 @@ const AppLayout = ({ children, sidebar }) => (
 AppLayout.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]).isRequired,
   sidebar: PropTypes.node,
+  backLinkArgs: PropTypes.object
 }
 
 AppLayout.defaultProps = {

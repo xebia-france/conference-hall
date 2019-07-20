@@ -1,0 +1,18 @@
+.proposal-subtitle {
+  display: flex;
+  align-items: center;
+  font-size: 0.9em;
+}
+
+.proposal-subtitle-item {
+  display: flex;
+  align-items: center;
+}
+
+.proposal-item-info-speaker {
+  margin-right: 1em;
+}
+
+.proposal-item-info-speaker:last-child {
+  margin-right: 0;
+}

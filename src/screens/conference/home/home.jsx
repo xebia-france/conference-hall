@@ -5,13 +5,17 @@ import './home.css'
 
 const Home = () => (
   <div className="home">
+    <Link code="vote-event-proposals" eventId="eOlXza98MufDjio43ulH" className="home-link">
+      <i className="fa fa-heart" />
+      <span>Je vote</span>
+    </Link>
     <Link code="speaker" className="home-link">
       <i className="fa fa-microphone" />
-      <span>I&apos;m a speaker</span>
+      <span>Je speake</span>
     </Link>
     <Link code="organizer" className="home-link">
       <i className="fa fa-rocket" />
-      <span>I&apos;m an organizer</span>
+      <span>J'organise</span>
     </Link>
   </div>
 )

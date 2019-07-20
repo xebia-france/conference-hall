@@ -15,9 +15,15 @@ service cloud.firestore {
     function fromMyEvent(eventRes) {
     	return eventRes.data.owner == request.auth.uid || get(/databases/$(database)/documents/organizations/$(eventRes.data.organization)).data.members[request.auth.uid] == true
     }
+
+    function fromMyEventWithVoteEnabled(eventRes) {
+        return request.auth.token.email.matches('.*@xebia[.]fr') ||
+          request.auth.token.email.matches('.*@publicissapient[.]com') ||
+          request.auth.token.email.matches('alexis[.]kinsella@gmail.com')
+    }
     function itsMyMessage(message) { return request.auth.uid == message.data.uid }
- 
-		function itsMySurvey() { return request.path[6] == request.auth.uid }
+
+	function itsMySurvey() { return request.path[6] == request.auth.uid }
     function hasInviteCode() { return request.resource.id == resource.id }
 
   	// BETA ACCESS
@@ -57,13 +63,13 @@ service cloud.firestore {
 
       // PROPOSALS
       match /proposals/{proposal} {
-      	allow read: if authenticated() && fromMyEvent(get(/databases/$(database)/documents/events/$(event)));
-        allow write: if authenticated() && (itsMyProposal() || fromMyEvent(get(/databases/$(database)/documents/events/$(event))));
+      	allow read: if authenticated() && fromMyEventWithVoteEnabled(get(/databases/$(database)/documents/events/$(event)));
+        allow write: if authenticated() && fromMyEventWithVoteEnabled(get(/databases/$(database)/documents/events/$(event)));
 
         // RATINGS
         match /ratings/{rating} {
-          allow read: if authenticated() && fromMyEvent(get(/databases/$(database)/documents/events/$(event)));
-          allow write: if authenticated() && fromMyEvent(get(/databases/$(database)/documents/events/$(event)));
+          allow read: if authenticated() && fromMyEventWithVoteEnabled(get(/databases/$(database)/documents/events/$(event)));
+          allow write: if authenticated() && fromMyEventWithVoteEnabled(get(/databases/$(database)/documents/events/$(event)));
         }
 
         // ORGANIZERS THREAD

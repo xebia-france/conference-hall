@@ -1,5 +1,6 @@
 import firebase from 'firebase/app'
 import omit from 'lodash/omit'
+import sortBy from 'lodash/sortBy'
 
 /**
  * Return the proposal with the given id
@@ -63,6 +64,12 @@ export const fetchEventProposals = async (
     proposals = proposals.filter(proposal => proposal.usersRatings && !!proposal.usersRatings[uid])
   } else if (ratings === 'notRated') {
     proposals = proposals.filter(proposal => !proposal.usersRatings || !proposal.usersRatings[uid])
+  }
+  
+  if (sortOrder === 'mostLiked') {
+    proposals = sortBy(proposals, [proposal => (proposal.likes || []).length]).reverse()
+  } else if (sortOrder === 'leastLiked') {
+    proposals = sortBy(proposals, [proposal => (proposal.likes || []).length])
   }
 
   return proposals

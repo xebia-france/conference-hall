@@ -13,6 +13,8 @@ const sortOrderLabel = sortOrder => ({
   oldest: 'Oldest',
   highestRating: 'Highest Ratings',
   lowestRating: 'Lowest Ratings',
+  mostLiked: 'Most Liked',
+  leastLiked: 'Least Liked'
 }[sortOrder])
 
 const ratingsLabel = rating => ({
